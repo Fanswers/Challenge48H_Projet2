@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+    <title>Ordonnance</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script type="text/javascript" src="jspdf.min.js"></script>
+    <script type="text/javascript">
+    
+        function genPDF() {
+
+            var doc = new jsPDF();
+
+            doc.text(20,20, "Docteur " + document.getElementById("doctorName").value);
+            doc.text(20,30, "Téléphone : " + document.getElementById("doctorPhone").value);
+            doc.text(20,40, "N°RPS : " + document.getElementById("identificationNumber").value);
+
+            doc.text(20,80, document.getElementById("patientSex").value + document.getElementById("patientName").value);
+            doc.text(20,90, "Poid : " + document.getElementById("patientWeight").value + " kg");
+            doc.text(20,100, "Age : " + document.getElementById("patientAge").value);
+
+            doc.text(50,150, "1. " + document.getElementById("firstMedicament").value);
+            doc.text(50,160, "2. " + document.getElementById("secondMedicament").value);
+            doc.text(50,170, "3. " + document.getElementById("thirdMedicament").value);
+            doc.text(50,180, "4. " + document.getElementById("fourthMedicament").value);
+            doc.text(50,190, "5. " + document.getElementById("fifthMedicament").value);
+
+
+
+            doc.text(80,130, "Ordonnance");
+            doc.save('Ordonnance.pdf');
+        }
+    </script>
+</head>
+<body>
+    <h1>Rédigez votre Ordonnance</h1>
+    <form>
+        <h2>Info Médecin</h2>
+        <section class="doctorInfo">
+            <div class="doctorName">
+                <label for="doctorName">Nom :</label>
+                <input type="text" id="doctorName"class="nameDoctor" placeholder="Tapez votre nom" required>
+            </div>
+            <div class="phone">
+                <label for="phone">Téléphone :</label>
+                <input type="tel" id="doctorPhone"class="doctorPhone" placeholder="Numéro téléphone" pattern="[0-9]{2}.[0-9]{2}.[0-9]{2}" required>
+            </div>
+            <div class="identificationNumber">
+                <label for="identificationNumber">Numéro d'identification</label>
+                <input type="text" id="identificationNumber" class="medecinIdentificationNumber" placeholder="Numéro d'identification" required>
+            </div>
+        </section>
+        <h2>Info Patient</h2>
+        <section class="infoPatient">
+            <div class="namePatient">
+                <label for="namePatient">Nom :</label>
+                <input type="text" id="patientName" class="patientName" placeholder="Nom du patient" required>
+            </div>
+            <div class="patientSex">
+                <label for="patientSex">Sexe :</label>
+                <select name="patientSex" id="patientSex">
+                    <option value="M. ">Homme</option>
+                    <option value="Mme. ">Femme</option>
+                </select>
+            </div>
+            <div class="weight">
+                <label for="weight">Poid :</label>
+                <input type="number" id="patientWeight" class="patienWeight" required>kg
+            </div>
+            <div class="age">
+                <label for="age">Age :</label>
+                <input type="number" id="patientAge" class="patientAge" required>
+            </div>
+        </section>
+        <h2>Prescription</h2>
+        <section class="Prescription">
+            <div class="firstMedicament">
+                <label for="firstMedicament">Premier médicament à prescrire</label>
+                <input type="text" id="firstMedicament" class="firstMedicament" required>
+            </div>
+            <div class="secondMedicament">
+                <label for="secondMedicament">Second médicament à prescrire</label>
+                <input type="text" id="secondMedicament" class="secondMedicament" required>
+            </div>
+            <div class="thirdMedicament">
+                <label for="thirdMedicament">Troisième médicament à prescrire</label>
+                <input type="text" id="thirdMedicament" class="thirdMedicament" required>
+            </div>
+            <div class="fourthMedicament">
+                <label for="fourthMedicament">Quatrième médicament à prescrire</label>
+                <input type="text" id="fourthMedicament" class="fourthMedicament" required>
+            </div>
+            <div class="fifthMedicament">
+                <label for="fifthMedicament">Cinquième médicament à prescrire</label>
+                <input type="text" id="fifthMedicament" class="fifthMedicament" required>
+            </div>
+        </section>
+    </form>
+    <a href="javascript:genPDF()">
+        <button class="generateOrdo"
+        type="button">
+    Générer l'ordonnance
+    </button>
+    </a>
+</body>
+</html>
